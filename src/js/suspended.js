@@ -262,6 +262,13 @@
 
         document.getElementById('bitcoinBtn').innerHTML = chrome.i18n.getMessage('js_donate_bitcoin');
         document.getElementById('paypalBtn').setAttribute('value', chrome.i18n.getMessage('js_donate_paypal'));
+
+        document.getElementById('bitcoinBtn').onclick = function (e) {
+            tgs.getAnalyticsTracker().sendEvent('Donations', 'Choose', 'Bitcoin');
+        };
+        document.getElementById('paypalBtn').onclick = function (e) {
+            tgs.getAnalyticsTracker().sendEvent('Donations', 'Choose', 'Paypal');
+        };
     }
 
     function displayPopup(e) {

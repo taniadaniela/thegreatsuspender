@@ -188,4 +188,6 @@
             return false;
         }
     });
+
+    tgs.getAnalyticsTracker().sendAppView('options.js');
 }());

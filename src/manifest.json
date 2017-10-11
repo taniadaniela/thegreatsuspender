@@ -11,12 +11,13 @@
     "http://*/*",
     "https://*/*",
     "chrome://favicon/*",
+    "https://www.google-analytics.com/",
     "https://greatsuspender.github.io/",
     "contextMenus",
     "cookies"
   ],
   "background": {
-    "scripts": ["js/db.js", "js/gsStorage.js", "js/background.js", "js/gsUtils.js", "js/gsSession.js"],
+    "scripts": ["js/google-analytics-bundle.js", "js/db.js", "js/gsStorage.js", "js/background.js", "js/gsUtils.js", "js/gsSession.js"],
     "persistent": true
   },
   "content_scripts": [

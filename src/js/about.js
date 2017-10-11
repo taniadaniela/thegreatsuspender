@@ -2,6 +2,7 @@
 (function () {
     'use strict';
 
+    var tgs = chrome.extension.getBackgroundPage().tgs;
     var gsStorage = chrome.extension.getBackgroundPage().gsStorage;
     var gsUtils = chrome.extension.getBackgroundPage().gsUtils;
 
@@ -20,9 +21,11 @@
 
         bitcoinBtn.onclick = function () {
             toggleNag(true);
+            tgs.getAnalyticsTracker().sendEvent('Donations', 'Choose', 'Bitcoin');
         };
         paypalBtn.onclick = function () {
             toggleNag(true);
+            tgs.getAnalyticsTracker().sendEvent('Donations', 'Choose', 'Paypal');
         };
 
         document.getElementById('alreadyDonatedToggle').onclick = function () {
@@ -32,6 +35,14 @@
         document.getElementById('donateAgainToggle').onclick = function () {
             toggleNag(false);
             window.location.reload();
+        };
+    }
+
+    function initAnalyticsConfig(config) {
+        var checkbox = document.getElementById('analyticsOptOut');
+        checkbox.checked = config.isTrackingPermitted();
+        checkbox.onchange = function () {
+            config.setTrackingPermitted(checkbox.checked);
         };
     }
 
@@ -56,5 +67,10 @@
                 el.style.display = 'none';
             });
         }
+
+        //set analytics on/off state
+        tgs.getAnalyticsService.getConfig().addCallback(initAnalyticsConfig);
     });
+
+    tgs.getAnalyticsTracker().sendAppView('about.js');
 }());

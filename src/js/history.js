@@ -5,6 +5,7 @@
     var gsSession = chrome.extension.getBackgroundPage().gsSession;
     var gsStorage = chrome.extension.getBackgroundPage().gsStorage;
     var gsUtils = chrome.extension.getBackgroundPage().gsUtils;
+    var tgs = chrome.extension.getBackgroundPage().tgs;
 
     function reloadTabs(sessionId, windowId, suspendMode) {
 
@@ -290,4 +291,6 @@
     gsUtils.documentReadyAndLocalisedAsPromsied(document).then(function () {
         render();
     });
+
+    tgs.getAnalyticsTracker().sendAppView('history.js');
 }());

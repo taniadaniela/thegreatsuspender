@@ -19,7 +19,9 @@ var tgs = (function () { // eslint-disable-line no-unused-vars
         temporaryWhitelistOnReloadByTabId = {},
         scrollPosByTabId = {},
         suspensionActiveIcon = '/img/icon19.png',
-        suspensionPausedIcon = '/img/icon19b.png';
+        suspensionPausedIcon = '/img/icon19b.png',
+        analyticsService,
+        analyticsTracker;
 
     function init() {
 
@@ -605,6 +607,14 @@ var tgs = (function () { // eslint-disable-line no-unused-vars
         });
     }
 
+    function getAnalyticsService() {
+        return analyticsService;
+    }
+
+    function getAnalyticsTracker() {
+        return analyticsTracker;
+    }
+
     //HANDLERS FOR RIGHT-CLICK CONTEXT MENU
 
     function buildContextMenu(showContextMenu) {
@@ -922,6 +932,11 @@ var tgs = (function () { // eslint-disable-line no-unused-vars
     ga('set', 'dimension4', gsStorage.getOption(gsStorage.NO_NAG) + '', 1);
     ga('send', 'pageview', '/background.js');
 
+    //chrome platform analytics
+    analyticsService = analytics.getService('the_great_suspender');
+    analyticsTracker = analyticsService.getTracker('UA-52338347-1');
+    analyticsTracker.sendAppView('background.js');
+
     return {
         init: init,
         requestNotice: requestNotice,
@@ -930,6 +945,8 @@ var tgs = (function () { // eslint-disable-line no-unused-vars
         resuspendSuspendedTab: resuspendSuspendedTab,
         updateIcon: updateIcon,
         requestTabInfo: requestTabInfo,
+        getAnalyticsService: getAnalyticsService,
+        getAnalyticsTracker: getAnalyticsTracker,
 
         //external action handlers
         unsuspendHighlightedTab: unsuspendHighlightedTab,

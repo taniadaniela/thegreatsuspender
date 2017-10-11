@@ -3,6 +3,7 @@
     'use strict';
 
     var gsUtils = chrome.extension.getBackgroundPage().gsUtils;
+    var tgs = chrome.extension.getBackgroundPage().tgs;
 
     gsUtils.documentReadyAndLocalisedAsPromsied(document).then(function () {
         var shortcutsEl = document.getElementById('keyboardShortcuts'),
@@ -27,4 +28,6 @@
             chrome.tabs.update({url: 'chrome://extensions/configureCommands'});
         };
     });
+
+    tgs.getAnalyticsTracker().sendAppView('shortcuts.js');
 }());
