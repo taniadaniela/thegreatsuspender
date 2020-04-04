@@ -3,20 +3,22 @@
 
 <head>
   <link type="text/css" href="css/style.css" rel="stylesheet">
+  <link type="text/css" href="css/debug.css" rel="stylesheet">
   <script type="text/javascript" src="js/debug.js"></script>
-  <title id='gsTitle'>The Great Suspender - Profiler</title>
+  <title id='gsTitle'>The Great Suspender - Debugger</title>
 </head>
 
-<body id="body">
+<body hidden>
   <div>
     <span>debugErrors: </span>
     <a id='toggleDebugError' href='#'></a> &nbsp;|&nbsp;
     <span>debugInfo: </span>
     <a id='toggleDebugInfo' href='#'></a> &nbsp;|&nbsp;
-    <span>discardAfterSuspend: </span>
-    <a id='toggleDiscardAfterSuspend' href='#'></a> &nbsp;|&nbsp;
     <span>discardInPlaceOfSuspend: </span>
-    <a id='toggleDiscardInPlaceOfSuspend' href='#'></a>
+    <a id='toggleDiscardInPlaceOfSuspend' href='#'></a> &nbsp;|&nbsp;
+    <span>useAlternateScreenCaptureLib: </span>
+    <a id='toggleUseAlternateScreenCaptureLib' href='#'></a> &nbsp;|&nbsp;
+    <a id='claimSuspendedTabs' href='#'>claim all suspended tabs</a>
   </div>
   <br />
   <div>
@@ -26,11 +28,13 @@
   </div>
 
   <hr />
-  <table id="gsProfiler" style="table-layout: fixed">
+  <table id="gsProfiler">
     <thead>
       <tr>
         <th>WinId</th>
         <th>TabId</th>
+        <th>Index</th>
+        <th></th>
         <th>Title</th>
         <th>Time to suspend</th>
         <th>Status</th>
